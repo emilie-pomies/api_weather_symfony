@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Votre météo !
+{% endblock %}
+
+{% block content %}
+
+<div class="page-content page-container" id="page-content" >
+    <div class="padding">
+        <div class=" container d-flex justify-content-center" >
+            <div class="col-lg grid-margin stretch-card">
+                <!--weather card-->
+                <div class="card card-weather">
+                    <div class="card-body">
+                        <div class="weather-date-location">
+                            <h3> {{ data.day }}</h3>
+                            <p class="text-gray"> <span class="weather-date">Le {{ data.date  }}</span> <span class="weather-location">À {{ data.country_name }} 
+                (lon. : {{ data.lon }}, lat. : {{ data.lat }})</span> </p>
+                        </div>
+                        <div class="weather-data d-flex">
+                            <div class="mr-auto">
+                                <h4 class="display-3">Température : {{ data.temperature }} °C (min. : {{ data.min }}, max. : {{ data.max }}) </h4>
+                                <p class="col-sm">
+                                    {{ data.description }}
+                                </p>
+                                <p class="col-sm">
+                                    <img class="weather-icon" src={{ data.icon_img }}>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--weather card ends-->
+            </div>
+
+{% set background = '' %}
+
+{% set today = 'NOW'|date('U') %}
+{% set spring = 'March 20'|date('U') %}
+{% set summer = 'June 20'|date('U') %}
+{% set fall = 'September 22'|date('U') %}
+{% set winter = 'December 21'|date('U') %}
+
+{% if today >= spring and today < summer %}
+    {% set background = 'https://cdn.pixabay.com/photo/2017/04/12/16/22/oilseed-rape-2224941_1280.jpg' %}
+{% elseif today >= summer and today < fall %}
+    {% set background = 'https://cdn.pixabay.com/photo/2019/06/27/03/42/beach-4301479_1280.jpg' %}
+{% elseif today >= fall and today < winter %}
+    {% set background = 'https://cdn.pixabay.com/photo/2018/01/09/20/22/tree-3072431_1280.jpg' %}
+{% else %}
+    {% set background = 'https://cdn.pixabay.com/photo/2019/01/20/11/32/eiskristalle-3943558_1280.jpg' %}
+{% endif %}
+
+<style>
+    .card-weather .card-body:first-child {
+        background: url('{{ background }}') no-repeat center;
+    }
+        </div>
+    </div>
+</div>
+
+{% endblock %}
